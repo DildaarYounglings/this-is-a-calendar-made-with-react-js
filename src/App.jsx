@@ -14,8 +14,10 @@ function App() {
             <span>{" "}{item.task}{" "}</span>
             <button type='button' onClick={()=> removeItemFromList(item)}>Delete</button>
           </article>)}
-          <input type="text" value={inputText} onChange={(e) => changeInputText(e.target.value)} />
-          <button type="button" onClick={() => addItemToList(todoItem)}> add new task</button>
+          <div style={{display:"flex",gap:"2rem",alignContent:"center",alignItems:"center",justifyContent:"center",justifyItems:"center"}}>
+            <input type="text" style={{height:"1.5rem"}} value={inputText} onChange={(e) => changeInputText(e.target.value)} />
+            <button type="button" onClick={() => addItemToList(todoItem)}> add new task</button>
+          </div>
         </form>
       </div>
     </>
