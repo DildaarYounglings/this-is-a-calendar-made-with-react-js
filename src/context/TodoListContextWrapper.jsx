@@ -18,7 +18,7 @@ export const TodoListContextWrapper = ({children}) => {
   }
   const removeItemFromList = (item) => {
     let copy = [...todoList].filter((todo) => todo.task !== item.task)
-    setTodoList(copy);
+    setTodoList(copy)
   }
   return (
     <TodoListContext.Provider value={{todoList,todoItem,addItemToList,removeItemFromList,inputText,changeInputText}}>
