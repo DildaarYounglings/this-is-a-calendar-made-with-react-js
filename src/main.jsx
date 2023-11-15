@@ -4,12 +4,14 @@ import App from './App.jsx'
 import './index.css'
 import { TodoListContextWrapper } from './context/TodoListContextWrapper.jsx'
 import { Calendar } from './components/Calendar.jsx'
+import { HexColorGenerator } from './components/HexColorGenerator.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <TodoListContextWrapper>
-      {/*<App />*/}
-      <Calendar/>
+      {/* <App /> */}
+      {/* <Calendar/> */}
+      <HexColorGenerator/>
     </TodoListContextWrapper>
-  </React.StrictMode>,
+  </React.StrictMode>
 )
