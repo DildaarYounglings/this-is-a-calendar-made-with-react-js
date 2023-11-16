@@ -70,7 +70,7 @@ export const Calendar = () => {
     if (month < 0 || month > 11) {
       date = new Date(year, month, new Date().getDate());
       year = date.getFullYear();
-      month = date.getMonth();
+      monthState = date.getMonth();
     } else {
       /* Set the date to the current date */
       date = new Date();
@@ -83,7 +83,7 @@ export const Calendar = () => {
     if (monthState < 0 || monthState > 11) {
       date = new Date(year, monthState, new Date().getDate());
       year = date.getFullYear();
-      month = date.getMonth();
+      monthState = date.getMonth();
     } else {
       /* Set the date to the current date */
       date = new Date();

@@ -1,4 +1,4 @@
-import React, { Children, createContext, useContext, useState } from 'react'
+import React, { Children, createContext, useContext, useRef, useState } from 'react'
 
 const TodoListContext = createContext();
 export const todoListContextData = () => useContext(TodoListContext);
@@ -6,6 +6,7 @@ export const todoListContextData = () => useContext(TodoListContext);
 
 
 export const TodoListContextWrapper = ({children}) => {
+  const dialogElRef = useRef();
   const [inputText,setInputText] = useState("")
   let todoItem = {task:inputText};
   const changeInputText = (text) => {
@@ -21,7 +22,7 @@ export const TodoListContextWrapper = ({children}) => {
     setTodoList(copy)
   }
   return (
-    <TodoListContext.Provider value={{todoList,todoItem,addItemToList,removeItemFromList,inputText,changeInputText}}>
+    <TodoListContext.Provider value={{todoList,todoItem,addItemToList,removeItemFromList,inputText,changeInputText,dialogElRef}}>
       {children}
     </TodoListContext.Provider>
   )
