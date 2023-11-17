@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { todoListContextData } from '../context/TodoListContextWrapper';
 
 export const CalendarEvent = () => {
-    const [calendarEvents,setCalendarEvents] = useState();
+    const {dialogElRef} = todoListContextData();
+    const [calendarEvents,setCalendarEvents] = useState([]);
   return (
-    <dialog>
+    <dialog ref={dialogElRef}>
         <div>
             <button>+</button>
             <ul style={{listStyleType:"none", display:"flex",flexDirection:"column",alignItems:"center",alignContent:"center"}}>

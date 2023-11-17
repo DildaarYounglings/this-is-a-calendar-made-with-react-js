@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 
 export const Calendar = () => {
-  let date = new Date();
-  let year = date.getFullYear();
-  let monthState = date.getMonth();
-  const [month,setMonth] = useState(monthState)
+  let dateState = new Date();
+  let year = dateState.getFullYear();
+  let monthState = dateState.getMonth();
+  const [date, setDate] = useState(dateState);
+  const [month, setMonth] = useState(monthState);
   const [currentDate, setCurrentDate] = useState("");
-  const [day, setDay] = useState([]);
+  const [daysOfTheMonth, setDaysOfTheMonthsOfTheMonth] = useState([]);
   const months = [
     "January",
     "February",
@@ -21,18 +22,51 @@ export const Calendar = () => {
     "November",
     "December",
   ];
+
+  const prevMonth = () => {
+    setMonth(month - 1);
+    monthState = month;
+    if (monthState < 0 || monthState > 11) {
+      dateState = new Date(year, month, new Date().getDate());
+      setDate(dateState);
+      year = date.getFullYear();
+
+      setMonth(date.getMonth());
+    } else {
+      /* Set the date to the current date */
+      dateState = new Date();
+      setDate(dateState);
+    }
+    manipulate();
+  };
+  const nextMonth = () => {
+    setMonth(month + 1);
+    monthState = month;
+    if (monthState < 0 || monthState > 11) {
+      dateState = new Date(year, monthState, new Date().getDate());
+      setDate(dateState);
+      year = dateState.getFullYear();
+      monthState = dateState.getMonth();
+      setMonth(monthState);
+    } else {
+      /* Set the date to the current date */
+      dateState = new Date();
+      setDate(dateState);
+    }
+    manipulate();
+  };
   const manipulate = () => {
     // get the first day of the month
-    let dayone = new Date(year,monthState, 1).getDay();
+    let dayone = new Date(year, month, 1).getDay();
 
     // get the last date of the month
-    let lastdate = new Date(year,monthState, 0).getDate();
+    let lastdate = new Date(year, month, 0).getDate();
 
     // get the day of the last date of the month
-    let dayend = new Date(year, monthState, lastdate).getDay();
+    let dayend = new Date(year, month, lastdate).getDay();
 
     // get the last date of the previous month
-    let monthlastdate = new Date(year,monthState, 0).getDate();
+    let monthlastdate = new Date(year, month, 0).getDate();
 
     let lit = []; // variable to store the generated calendar HTML
 
@@ -45,7 +79,7 @@ export const Calendar = () => {
     for (let i = 1; i <= lastdate; i++) {
       // check if the current date is today
       let isToday =
-        i === date.getDate() &&
+        i === dateState.getDate() &&
         monthState === new Date().getMonth() &&
         year === new Date().getFullYear()
           ? "active"
@@ -62,34 +96,8 @@ export const Calendar = () => {
     setCurrentDate(`${months[monthState]} ${year}`);
 
     // update the HTML of the dates element with the generated calendar
-    setDay(lit);
+    setDaysOfTheMonthsOfTheMonth(lit);
   };
-  const prevMonth = () => {
-    setMonth(month - 1);
-    monthState = month;
-    if (month < 0 || month > 11) {
-      date = new Date(year, month, new Date().getDate());
-      year = date.getFullYear();
-      monthState = date.getMonth();
-    } else {
-      /* Set the date to the current date */
-      date = new Date();
-    }
-    manipulate();
-  }
-  const nextMonth = () => {
-    setMonth(month + 1);
-    monthState = month;
-    if (monthState < 0 || monthState > 11) {
-      date = new Date(year, monthState, new Date().getDate());
-      year = date.getFullYear();
-      monthState = date.getMonth();
-    } else {
-      /* Set the date to the current date */
-      date = new Date();
-    }
-    manipulate();
-  }
   useEffect(() => {
     manipulate();
   }, []);
@@ -233,10 +241,11 @@ export const Calendar = () => {
             <li>Fri</li>
             <li>Sat</li>
           </ul>
-          <ul class="calendar-dates">{day.map((day) => day)}</ul>
+          <ul class="calendar-dates">
+            {daysOfTheMonth.map((dayOfTheMonth) => dayOfTheMonth)}
+          </ul>
         </div>
       </div>
     </>
   );
 };
-``;
